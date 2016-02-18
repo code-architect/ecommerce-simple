@@ -2,6 +2,7 @@
 /**
 * Created by PhpStorm.
  * User: Code-Architect
+ * File: Footer.php
 */
 
 ?>
