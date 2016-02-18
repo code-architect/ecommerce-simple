@@ -9,8 +9,9 @@ session_start();
 // Configure paths
 defined("DS") ? null : define("DS", DIRECTORY_SEPARATOR);
 
-defined("TEMPLATE_FRONT") ? null : define("TEMPLATE_FRONT", __DIR__.DS."template".DS."front");
-defined("TEMPLATE_BACK") ? null : define("TEMPLATE_BACK", __DIR__.DS."template".DS."back");
+defined("TEMPLATE_FRONT") ? null : define("TEMPLATE_FRONT", __DIR__.DS."templates".DS."front");
+defined("TEMPLATE_BACK") ? null : define("TEMPLATE_BACK", __DIR__.DS."templates".DS."back");
+
 
 // Database information
 defined("DB_HOST") ? null : define("DB_HOST", "localhost");
