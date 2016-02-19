@@ -9,8 +9,17 @@
 <div class="col-md-3">
     <p class="lead">Shop Name</p>
     <div class="list-group">
-        <a href="#" class="list-group-item">Category 1</a>
-        <a href="#" class="list-group-item">Category 2</a>
-        <a href="#" class="list-group-item">Category 3</a>
+
+        <?php
+            $result = query(escape_string("SELECT * FROM categories"));
+            confirm($result);
+
+            while($row = fetch_array($result)){
+
+                echo "<a href='".$row['cat_id']."' class='list-group-item'>".$row['cat_title']."</a>";
+            }
+        ?>
+
+
     </div>
 </div>
