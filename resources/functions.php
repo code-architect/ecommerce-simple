@@ -5,6 +5,15 @@
  */
 
 
+
+
+
+/*************************************************************************/
+/*****************           Helper Functions         *******************/
+/*************************************************************************/
+
+
+
 /**
  * @work Redirect the user
  * @param $location | name of the file
@@ -65,3 +74,43 @@ function fetch_array($result)
 {
     return mysqli_fetch_array($result);
 }
+
+
+/*************************************************************************/
+/*****************           Product Functions         *******************/
+/*************************************************************************/
+
+/**
+ * @work Get product thumbnails
+ */
+function get_products()
+{
+    $query = query("SELECT * FROM products");
+    confirm($query);
+
+    while($row = fetch_array($query)){
+
+        $product = <<<DELEMITER
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="{$row['product_image']}">
+                            <div class="caption">
+                                <h4 class="pull-right">{$row['product_price']}</h4>
+                                <h4><a href="#">{$row['product_title']}</a>
+                                </h4>
+                                <p>{$row['product_description']}</p>
+
+                                <a class="btn btn-primary" target="_blank" href="">View Tutorial</a>
+                            </div>
+
+                        </div>
+                    </div>
+DELEMITER;
+
+        echo $product;
+
+
+    }
+}
+

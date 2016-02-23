@@ -14,7 +14,7 @@
             $result = query(escape_string("SELECT * FROM categories"));
             confirm($result);
 
-            while($row = fetch_array($result)){
+        while($row = fetch_array($result)){
 
                 echo "<a href='".$row['cat_id']."' class='list-group-item'>".$row['cat_title']."</a>";
             }
