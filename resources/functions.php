@@ -100,7 +100,7 @@ function get_products()
                             <a href="item.php?id={$row['product_id']}"><img src="{$row['product_image']}"></a>
                             <div class="caption">
                                 <h4 class="pull-right">&#8377;{$row['product_price']}</h4>
-                                <h4><a href="#">{$row['product_title']}</a>
+                                <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                                 </h4>
                                 <p>{$row['product_description']}</p>
 
@@ -130,11 +130,7 @@ function get_categories()
 
     while($row = fetch_array($result))
     {
-$category_linbks = <<<DELEMITER
-
-            <a href='category.php?id={$row['cat_id']}' class='list-group-item'>{$row['cat_title']}</a>
-DELEMITER;
-        echo $category_linbks;
+        echo "<a href='category.php?id=".$row['cat_id']."' class='list-group-item'>".$row['cat_title']."</a>";
     }
 
 }

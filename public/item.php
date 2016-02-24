@@ -18,55 +18,50 @@
 
     <div class="col-md-7">
 
-
-       <img class="img-responsive" src="../resources/" alt="">
-
+       <img class="img-responsive" src="http://placehold.it/700x600" alt="">
 
     </div>
 
     <div class="col-md-5">
 
         <div class="thumbnail">
-         
 
-    <div class="caption-full">
-        <h4><a href="#"><?php echo $row['product_title']; ?></a> </h4>
-        <hr>
-        <h4 class=""><?php echo "&#36;" . $row['product_price']; ?></h4>
+            <div class="caption-full">
+                <h4><a href="#">JavaScript Course</a> </h4>
+                <hr>
+                <h4 class="">$22.45</h4>
 
-    <div class="ratings">
-     
-        <p>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star"></span>
-            <span class="glyphicon glyphicon-star-empty"></span>
-            4.0 stars
-        </p>
-    </div>
-          
-        <p><?php echo $row['short_desc']; ?></p>
+                <div class="ratings">
 
-   
-    <form action="">
-        <div class="form-group">
-           <a href="../resources/cart.php?add=<?php echo $row['product_id']; ?>" class="btn btn-primary">ADD</a>
-        </div>
-    </form>
+                    <p>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        4.0 stars
+                    </p>
+                </div>
 
-    </div>
+                <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
+
+
+                <form action="">
+                    <div class="form-group">
+                       <a href="" class="btn btn-primary">ADD</a>
+                    </div>
+                </form>
+
+            </div>
  
-</div>
+        </div>
 
-</div>
+    </div>
 
 
 </div><!--Row For Image and Short Description-->
 
-
         <hr>
-
 
 <!--Row for Tab Panel-->
 
@@ -85,9 +80,9 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
 
-<p></p>
+        <p></p>
 
-<p><?php echo $row['product_description']; ?></p>
+        <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">
 
@@ -187,7 +182,6 @@
 
 
 </div><!--Row for Tab Panel-->
-
 
 
 
