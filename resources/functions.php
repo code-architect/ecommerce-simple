@@ -76,12 +76,15 @@ function fetch_array($result)
 }
 
 
+
 /*************************************************************************/
 /*****************           Product Functions         *******************/
 /*************************************************************************/
 
+
+
 /**
- * @work Get product thumbnails
+ * @work Get product thumbnails details
  */
 function get_products()
 {
@@ -94,14 +97,14 @@ function get_products()
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <img src="{$row['product_image']}">
+                            <a href="item.php?id={$row['product_id']}"><img src="{$row['product_image']}"></a>
                             <div class="caption">
-                                <h4 class="pull-right">{$row['product_price']}</h4>
+                                <h4 class="pull-right">&#8377;{$row['product_price']}</h4>
                                 <h4><a href="#">{$row['product_title']}</a>
                                 </h4>
                                 <p>{$row['product_description']}</p>
 
-                                <a class="btn btn-primary" target="_blank" href="">View Tutorial</a>
+                                <a class="btn btn-primary" target="_blank" href="">Add To Cart</a>
                             </div>
 
                         </div>
@@ -110,7 +113,16 @@ DELEMITER;
 
         echo $product;
 
-
     }
 }
 
+
+//-----------------------------------------------------------------------//
+
+
+/**
+ *
+ */
+function get_categories(){
+
+}
