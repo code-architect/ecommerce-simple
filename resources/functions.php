@@ -121,8 +121,20 @@ DELEMITER;
 
 
 /**
- *
+ * @work Getting categories dynamically
  */
-function get_categories(){
+function get_categories()
+{
+    $result = query(escape_string("SELECT * FROM categories"));
+    confirm($result);
+
+    while($row = fetch_array($result))
+    {
+$category_linbks = <<<DELEMITER
+
+            <a href='category.php?id={$row['cat_id']}' class='list-group-item'>{$row['cat_title']}</a>
+DELEMITER;
+        echo $category_linbks;
+    }
 
 }
