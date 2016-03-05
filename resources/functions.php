@@ -87,7 +87,7 @@ function fetch_array($result)
  * @param string $type DESC|default(ASC)
  */
 
-function get_products($type = 'asc')
+function get_products($type = 'ASC')
 {
     $query = query("SELECT * FROM products ORDER BY product_id $type");
     confirm($query);
@@ -141,7 +141,9 @@ function get_categories()
 
 /**
  * @work Getting categories by id dynamically
+ * @param $id S_GET id
  */
+
 function get_products_by_category($id)
 {
     $query = query("SELECT * FROM products WHERE product_category_id = $id");
