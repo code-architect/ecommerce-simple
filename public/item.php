@@ -8,7 +8,16 @@
         <?php include(TEMPLATE_FRONT.DS."side_nav.php"); ?>
 
 
+<?php
 
+    $query = query("SELECT * FROM products WHERE product_id = ".escape_string($_GET['id']));
+    confirm($query);
+
+    while($row = fetch_array($query)){
+
+
+
+?>
 
 <div class="col-md-9">
 
@@ -18,7 +27,7 @@
 
     <div class="col-md-7">
 
-       <img class="img-responsive" src="http://placehold.it/700x600" alt="">
+       <img class="img-responsive" src="<?php echo $row['product_image_big']; ?>" alt="">
 
     </div>
 
@@ -27,9 +36,9 @@
         <div class="thumbnail">
 
             <div class="caption-full">
-                <h4><a href="#">JavaScript Course</a> </h4>
+                <h4><a href="#"><?php echo $row['product_title']; ?></a> </h4>
                 <hr>
-                <h4 class="">$22.45</h4>
+                <h4 class=""><?php echo $row['product_price']; ?></h4>
 
                 <div class="ratings">
 
@@ -43,7 +52,7 @@
                     </p>
                 </div>
 
-                <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
+                <p><?php echo $row['product_short_desc']; ?> </p>
 
 
                 <form action="">
@@ -82,7 +91,7 @@
 
         <p></p>
 
-        <p>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla </p>
+        <p><?php echo $row['product_description']; ?> </p>
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">
 
@@ -137,7 +146,10 @@
 
     </div>
 
-
+    <?php
+    // end of while
+    }
+    ?>
     <div class="col-md-6">
         <h3>Add A review</h3>
 

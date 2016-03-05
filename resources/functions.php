@@ -102,7 +102,7 @@ function get_products()
                                 <h4 class="pull-right">&#8377;{$row['product_price']}</h4>
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                                 </h4>
-                                <p>{$row['product_description']}</p>
+                                <p>{$row['product_short_desc']}</p>
 
                                 <a class="btn btn-primary" target="_blank" href="">Add To Cart</a>
                             </div>
