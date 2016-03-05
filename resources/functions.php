@@ -82,13 +82,14 @@ function fetch_array($result)
 /*************************************************************************/
 
 
-
 /**
  * @work Get product thumbnails details
+ * @param string $type DESC|default(ASC)
  */
-function get_products()
+
+function get_products($type = 'asc')
 {
-    $query = query("SELECT * FROM products");
+    $query = query("SELECT * FROM products ORDER BY product_id $type");
     confirm($query);
 
     while($row = fetch_array($query)){
@@ -134,3 +135,74 @@ function get_categories()
     }
 
 }
+
+
+//-----------------------------------------------------------------------//
+
+/**
+ * @work Getting categories by id dynamically
+ */
+function get_products_by_category($id)
+{
+    $query = query("SELECT * FROM products WHERE product_category_id = $id");
+    $get_num_rows = mysqli_num_rows($query);
+    confirm($query);
+
+    // If query returns rows, only then execute this else redirect user
+    if($get_num_rows) {
+
+        while ($row = fetch_array($query)) {
+
+            /* $product = <<<DELEMITER
+
+                          <div class="col-md-3 col-sm-6 hero-feature">
+                             <div class="thumbnail">
+                                 <img src="{$row['product_image']}" alt="">
+                                 <div class="caption">
+                                     <h3>{$row['product_title']}</h3>
+                                     <p>{$row['product_short_desc']}</p>
+                                     <p>
+                                       <a href="#" class="btn btn-primary">Buy Now!</a>
+                                       <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                                     </p>
+                                 </div>
+                             </div>
+                         </div>
+     DELEMITER;*/
+
+            $product = <<<DELEMITER
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <a href="item.php?id={$row['product_id']}"><img src="{$row['product_image']}"></a>
+                            <div class="caption">
+                                <h4 class="pull-right">&#8377;{$row['product_price']}</h4>
+                                <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
+                                </h4>
+                                <p>{$row['product_short_desc']}</p>
+                                <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                                <a class="btn btn-primary" target="_blank" href="">Add To Cart</a>
+                            </div>
+
+                        </div>
+                    </div>
+DELEMITER;
+            echo $product;
+
+        }
+    }else{
+        redirect('index.php');
+    }
+}
+
+
+
+//-----------------------------------------------------------------------//
+
+
+
+
+
+
+
+
