@@ -14,14 +14,12 @@ if(isset($_POST['submit'])){
     $password = md5(escape_string($_POST['password']));
 
     login_user($username, $password);
-
-    print_r($_SESSION);
 }
 ?>
 
 
     <!-- Login Form -->
-
+    <h2 class="text-center bg-warning"><?php display_message(); ?></h2>
 <div class = "container">
     <div class="wrapper">
         <form action="" method="post" name="Login_Form" class="form-signin">
@@ -35,6 +33,7 @@ if(isset($_POST['submit'])){
         </form>
     </div>
 </div>
+<?php display_message(); ?>
     <!-- Login Form End -->
 
 

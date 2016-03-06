@@ -13,7 +13,38 @@
 /*************************************************************************/
 
 
+/**
+ * @work Set respond text|message to session
+ * @param $msg String
+ */
+function set_message($msg){
 
+    if(!empty($msg)){
+        $_SESSION['message'] = $msg;
+
+    }else{
+        $msg = '';
+    }
+}
+
+
+
+//-----------------------------------------------------------------------//
+
+
+/**
+ * @work Display $_SESSION['message'] then unset it
+ */
+function display_message(){
+
+    if(isset($_SESSION['message'])){
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
+}
+
+
+//-----------------------------------------------------------------------//
 
 
 
@@ -24,6 +55,7 @@
 function redirect($location){
     header("Location: $location");
 }
+
 
 //-----------------------------------------------------------------------//
 
@@ -212,8 +244,9 @@ function login_user($username, $password)
     confirm($query);
 
 
-    if($num_rows = mysqli_num_rows($query) == 0)
+    if(mysqli_num_rows($query) == 0)
     {
+        set_message("Your Password or Username is not correct!!!");
         redirect("login.php");
     }else{
         $row = fetch_array($query);
