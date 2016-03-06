@@ -14,6 +14,9 @@
 
 
 
+
+
+
 /**
  * @work Redirect the user
  * @param $location | name of the file
@@ -203,8 +206,29 @@ DELEMITER;
 
 
 
+function login_user($username, $password)
+{
+    $query = query("SELECT * FROM users WHERE username = '$username' AND user_password = '$password' LIMIT 1");
+    confirm($query);
+
+
+    if($num_rows = mysqli_num_rows($query) == 0)
+    {
+        redirect("login.php");
+    }else{
+        $row = fetch_array($query);
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['user_email'] = $row['user_email'];
+        redirect("admin");
+    }
+}
 
 
 
 
 
+
+
+/*************************************************************************/
+/*****************          Back End Functions         *******************/
+/*************************************************************************/
