@@ -139,7 +139,7 @@ function get_products($type = 'ASC')
                                 </h4>
                                 <p>{$row['product_short_desc']}</p>
 
-                                <a class="btn btn-primary" target="_blank" href="">Add To Cart</a>
+                                <a class="btn btn-primary" target="_blank" href="cart.php?add={$row['product_id']}">Add To Cart</a>
                             </div>
 
                         </div>
@@ -198,7 +198,7 @@ function get_products_by_category($id)
                                      <h3>{$row['product_title']}</h3>
                                      <p>{$row['product_short_desc']}</p>
                                      <p>
-                                       <a href="#" class="btn btn-primary">Buy Now!</a>
+                                       <a href="cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a>
                                        <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
                                      </p>
                                  </div>
@@ -217,7 +217,7 @@ function get_products_by_category($id)
                                 </h4>
                                 <p>{$row['product_short_desc']}</p>
                                 <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
-                                <a class="btn btn-primary" target="_blank" href="">Add To Cart</a>
+                                <a class="btn btn-primary" target="_blank" href="cart.php?add={$row['product_id']}">Add To Cart</a>
                             </div>
 
                         </div>
@@ -232,6 +232,21 @@ DELEMITER;
 }
 
 
+
+
+
+//-----------------------------------------------------------------------//
+
+/**
+ * @work If somebody enters here with out proper Get value
+ * @param $value $_GEt[value]
+ */
+function redirect_if_not_valid($value)
+{
+    if ($_GET[$value] == 0 || $_GET[$value] == '' || $_GET[$value] == NULL) {
+        redirect('index.php');
+    }
+}
 
 /*************************************************************************/
 /*****************          Back End Functions         *******************/

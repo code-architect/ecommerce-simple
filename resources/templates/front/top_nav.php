@@ -24,6 +24,12 @@
                 <a href="shop.php">Shop</a>
             </li>
             <li>
+                <a href="checkout.php">Check out</a>
+            </li>
+            <li>
+                <a href="item.php">Items</a>
+            </li>
+            <li>
                 <a href="login.php">Login</a>
             </li>
             <li>

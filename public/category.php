@@ -3,11 +3,7 @@
 <!-- Page Content -->
 
 <?php
-// If somebody enters here with out Get Id
-if($_GET['id'] == 0 || $_GET['id'] == '' || $_GET['id'] == NULL ){
-    redirect('index.php');
-}
-
+redirect_if_not_valid('id');
 ?>
     <!-- Page Content -->
     <div class="container">

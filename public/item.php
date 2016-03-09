@@ -7,7 +7,13 @@
         <!-- Categories here -->
         <?php include(TEMPLATE_FRONT.DS."side_nav.php"); ?>
 
-
+<?php
+    /* If somebody enters here with out Get Id
+    if($_GET['id'] == 0 || $_GET['id'] == '' || $_GET['id'] == NULL ){
+        redirect('index.php');
+    }*/
+    redirect_if_not_valid('id');
+?>
 <?php
 
     $query = query("SELECT * FROM products WHERE product_id = ".escape_string($_GET['id']));
@@ -57,7 +63,7 @@
 
                 <form action="">
                     <div class="form-group">
-                       <a href="" class="btn btn-primary">ADD</a>
+                       <a href="cart.php?add=<?php echo $row['product_id']; ?>" class="btn btn-primary">ADD</a>
                     </div>
                 </form>
 
