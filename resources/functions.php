@@ -47,7 +47,6 @@ function display_message(){
 //-----------------------------------------------------------------------//
 
 
-
 /**
  * @work Redirect the user
  * @param $location | name of the file
@@ -234,10 +233,15 @@ DELEMITER;
 
 
 
-//-----------------------------------------------------------------------//
+/*************************************************************************/
+/*****************          Back End Functions         *******************/
+/*************************************************************************/
 
-
-
+/**
+ * @work user login
+ * @param $username Username
+ * @param $password Password (encrypted)
+ */
 function login_user($username, $password)
 {
     $query = query("SELECT * FROM users WHERE username = '$username' AND user_password = '$password' LIMIT 1");
@@ -258,10 +262,32 @@ function login_user($username, $password)
 
 
 
+//-----------------------------------------------------------------------//
 
 
+function send_message()
+{
+    if(isset($_POST['submit'])){
+
+        $to = "xyz@abc.com";
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $message = $_POST['message'];
+
+        $headers = "From: {$name} {$email}";
+
+        $result = mail($to, $phone, $message, $headers);
+
+        if(!$result){
+            set_message("ERROR!! Sorry we could not send your message!");
+        }else{
+            set_message("Your message has been sent");
+        }
+    }
+}
 
 
 /*************************************************************************/
-/*****************          Back End Functions         *******************/
+/*****************             Admin Functions         *******************/
 /*************************************************************************/
