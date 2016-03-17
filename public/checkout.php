@@ -33,17 +33,7 @@ echo $_SESSION['product_1'];
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Apple</td>
-                    <td>&#36;12</td>
-                    <td>2</td>
-                    <td>&#36;24</td>
-                    <td>
-                        <a class='btn btn-warning' href="cart.php?remove=1"><span class='glyphicon glyphicon-minus'></span></a>
-                        <a class='btn btn-success' href="cart.php?add="><span class='glyphicon glyphicon-plus'></span></a>
-                        <a class='btn btn-danger' href="cart.php?delete=1"><span class='glyphicon glyphicon-remove'></span></a>
-                    </td>
-                <tr>
+                    <?php cart(); ?>
                 </tbody>
             </table>
         </form>
