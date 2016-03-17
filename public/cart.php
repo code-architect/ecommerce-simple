@@ -29,4 +29,29 @@ if(isset($_GET['add'])){
     }
 
 }
+// Asking to reduce product quantity
+elseif(isset($_GET['remove'])) {
 
+    // reduce 1 from the cart
+    $_SESSION['product_'.$_GET['remove']]--;
+
+    // If there is nothing in the cart unset the session and redirect
+    if($_SESSION['product_'.$_GET['remove']] < 1 )
+    {
+        unset( $_SESSION['product_'.$_GET['remove']]);
+        redirect("checkout.php");
+    }
+    else
+    {
+        redirect("checkout.php");
+    }
+
+}
+// Asking to delete product
+elseif(isset($_GET['delete'])) {
+
+    $_SESSION['product_'.$_GET['delete']] = '0';
+    unset( $_SESSION['product_'.$_GET['delete']]);
+    redirect("checkout.php");
+
+}
