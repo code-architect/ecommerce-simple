@@ -5,7 +5,7 @@
 <?php
 
 //session_destroy();
-echo $_SESSION['product_1'];
+
 ?>
 
 

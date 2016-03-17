@@ -57,14 +57,30 @@ elseif(isset($_GET['delete'])) {
 }
 
 
-function cart()
-{
-    $query = query("SELECT * FROM products");
-    confirm($query);
+function cart(){
 
-    while($row = fetch_array($query)) {
+    // looping throw SESSION
+    foreach ($_SESSION as $name => $value) {
 
-        $product = <<<DELEMITER
+        // if there is product in the curt show it
+        if ($value > 0) {
+
+            // making sure that we are looping throw the right session
+            if (substr($name, 0, 8) == "product_") {
+
+                // getting the length of the string minus "product_"
+                $length = strlen($name-8);
+
+                // id of the product from session
+                $id = substr($name, 8,$length);
+
+
+                $query = query("SELECT * FROM products WHERE product_id = ".$id);
+                confirm($query);
+
+                while ($row = fetch_array($query)) {
+
+                    $product = <<<DELEMITER
 
         <tr>
             <td>{$row['product_title']}</td>
@@ -79,10 +95,14 @@ function cart()
          <tr>
 DELEMITER;
 
-        echo $product;
+                    echo $product;
 
+                }
+            }
+        }
     }
 
 
 }
+
 
