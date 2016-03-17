@@ -50,20 +50,28 @@
                 <tr class="cart-subtotal">
                     <th>Items:</th>
                     <td><span class="amount"></span>
-
+                <?php
+                    echo isset($_SESSION['total_products']) ? $_SESSION['total_products'] : $_SESSION['total_products'] = 0;
+                ?>
                     </td>
                 </tr>
 
                 <tr class="shipping">
                     <th>Shipping and Handling</th>
-
+                <?php
+                    if(isset($_SESSION['total_price'])){
+                        echo ($_SESSION['total_price'] > 100 || $_SESSION['total_price'] == 100) ? "<td>Free Shipping</td>" : "<td>No Free Shipping</td>";
+                    }
+                ?>
 
                 </tr>
 
                 <tr class="order-total">
                     <th>Order Total</th>
                     <td><strong><span class="amount">&#36;
-
+                <?php
+                    echo isset($_SESSION['total_price']) ? $_SESSION['total_price'] : $_SESSION['total_price'] = 0;
+                ?>
 </span></strong> </td>
                 </tr>
 

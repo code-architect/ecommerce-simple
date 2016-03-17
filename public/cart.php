@@ -39,6 +39,8 @@ elseif(isset($_GET['remove'])) {
     if($_SESSION['product_'.$_GET['remove']] < 1 )
     {
         unset( $_SESSION['product_'.$_GET['remove']]);
+        unset($_SESSION['total_price']);
+        unset($_SESSION['total_products']);
         redirect("checkout.php");
     }
     else
@@ -52,12 +54,17 @@ elseif(isset($_GET['delete'])) {
 
     $_SESSION['product_'.$_GET['delete']] = '0';
     unset( $_SESSION['product_'.$_GET['delete']]);
+    unset($_SESSION['total_price']);
+    unset($_SESSION['total_products']);
     redirect("checkout.php");
 
 }
 
 
 function cart(){
+
+    $total_products = 0;
+    $total_price = 0;
 
     // looping throw SESSION
     foreach ($_SESSION as $name => $value) {
@@ -100,6 +107,8 @@ DELEMITER;
 
                     echo $product;
 
+                    $_SESSION['total_price'] = $total_price += $sub;
+                    $_SESSION['total_products'] = $total_products += $value;
                 }
             }
         }
