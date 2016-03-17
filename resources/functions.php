@@ -123,7 +123,7 @@ function fetch_array($result)
 
 function get_products($type = 'ASC')
 {
-    $query = query("SELECT * FROM products ORDER BY product_id $type");
+    $query = query("SELECT * FROM products WHERE product_quantity > 0 ORDER BY product_id $type");
     confirm($query);
 
     while($row = fetch_array($query)){
@@ -139,7 +139,7 @@ function get_products($type = 'ASC')
                                 </h4>
                                 <p>{$row['product_short_desc']}</p>
 
-                                <a class="btn btn-primary" target="_blank" href="cart.php?add={$row['product_id']}">Add To Cart</a>
+                                <a class="btn btn-primary" href="cart.php?add={$row['product_id']}">Add To Cart</a>
                             </div>
 
                         </div>
@@ -180,7 +180,7 @@ function get_categories()
 
 function get_products_by_category($id)
 {
-    $query = query("SELECT * FROM products WHERE product_category_id = $id");
+    $query = query("SELECT * FROM products WHERE product_category_id = $id and product_quantity > 0");
     $get_num_rows = mysqli_num_rows($query);
     confirm($query);
 
@@ -280,6 +280,7 @@ function login_user($username, $password)
 //-----------------------------------------------------------------------//
 
 
+
 function send_message()
 {
     if(isset($_POST['submit'])){
@@ -301,6 +302,17 @@ function send_message()
         }
     }
 }
+
+
+
+//-----------------------------------------------------------------------//
+
+
+
+
+
+
+
 
 
 /*************************************************************************/

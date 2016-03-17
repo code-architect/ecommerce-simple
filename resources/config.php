@@ -3,8 +3,10 @@
  * Created by PhpStorm.
  * User: Code-Architect
  */
-session_start();
 ob_start();
+session_start();
+
+
 
 // Configure paths
 defined("DS") ? null : define("DS", DIRECTORY_SEPARATOR);

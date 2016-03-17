@@ -44,7 +44,7 @@
             <div class="caption-full">
                 <h4><a href="#"><?php echo $row['product_title']; ?></a> </h4>
                 <hr>
-                <h4 class=""><?php echo $row['product_price']; ?></h4>
+                <h4 class="">&#36;<?php echo $row['product_price']; ?></h4>
 
                 <div class="ratings">
 
@@ -63,7 +63,7 @@
 
                 <form action="">
                     <div class="form-group">
-                       <a href="cart.php?add=<?php echo $row['product_id']; ?>" class="btn btn-primary">ADD</a>
+                       <a href="../resources/cart.php?add=<?php echo $row['product_id']; ?>" class="btn btn-primary">ADD</a>
                     </div>
                 </form>
 
