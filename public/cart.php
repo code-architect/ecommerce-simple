@@ -23,7 +23,7 @@ if(isset($_GET['add'])){
         else
         {
             // Printing default message if condition not satisfied
-            set_message("We only have ".$row['product_quantity']." available ".$row['product_title']);
+            set_message("We only have ".$row['product_quantity']." ".$row['product_title']." available.");
             redirect('checkout.php');
         }
     }
@@ -80,13 +80,16 @@ function cart(){
 
                 while ($row = fetch_array($query)) {
 
+                    // subtotal of the product
+                    $sub = $row['product_price'] * $value;
+
                     $product = <<<DELEMITER
 
         <tr>
             <td>{$row['product_title']}</td>
             <td>&#36;{$row['product_price']}</td>
-            <td>2</td>
-            <td>&#36;24</td>
+            <td>{$value}</td>
+            <td>&#36;{$sub}</td>
             <td>
                 <a class='btn btn-warning' href="cart.php?remove={$row['product_id']}"><span class='glyphicon glyphicon-minus'></span></a>
                 <a class='btn btn-success' href="cart.php?add={$row['product_id']}"><span class='glyphicon glyphicon-plus'></span></a>
