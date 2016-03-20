@@ -63,6 +63,11 @@ elseif(isset($_GET['delete'])) {
 
 function cart(){
 
+    $item_name = 1;
+    $item_number = 1;
+    $item_amount = 1;
+    $quantity = 1;
+
     $total_products = 0;
     $total_price = 0;
 
@@ -103,9 +108,20 @@ function cart(){
                 <a class='btn btn-danger' href="cart.php?delete={$row['product_id']}"><span class='glyphicon glyphicon-remove'></span></a>
             </td>
          <tr>
+
+          <input type="hidden" name="item_name_{$item_name}" value="{$row['product_title']}">
+          <input type="hidden" name="item_number_{$item_number}" value="{$row['product_id']}">
+          <input type="hidden" name="amount_{$item_amount}" value="{$row['product_price']}">
+          <input type="hidden" name="quantity_{$value}" value="{$value}">
 DELEMITER;
 
                     echo $product;
+
+                    $item_name++;
+                    $item_number++;
+                    $item_amount++;
+                    $quantity++;
+
 
                     $_SESSION['total_price'] = $total_price += $sub;
                     $_SESSION['total_products'] = $total_products += $value;

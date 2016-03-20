@@ -20,7 +20,7 @@
 
         <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
             <input type="hidden" name="cmd" value="_cart">
-            <input type="hidden" name="business" value="edwindiaz123-facilitator@gmail.com">
+            <input type="hidden" name="business" value="jaindoe@xyz.com">
             <input type="hidden" name="currency_code" value="US">
             <table class="table table-striped">
                 <thead>
@@ -36,6 +36,15 @@
                     <?php cart(); ?>
                 </tbody>
             </table>
+            <?php
+                if($_SESSION['total_products'] != 0){
+            ?>
+
+            <input type="image" name="upload"
+                   src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
+                   alt="PayPal - The safer, easier way to pay online">
+
+            <?php } else { echo ""; } ?>
         </form>
 
 
