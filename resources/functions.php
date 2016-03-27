@@ -271,7 +271,12 @@ function login_user($username, $password)
         $row = fetch_array($query);
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_email'] = $row['user_email'];
-        redirect("admin");
+
+        if($_SESSION['username'] == "admin") {
+            redirect("admin");
+        }else{
+            redirect("checkout.php");
+        }
     }
 }
 
@@ -308,7 +313,15 @@ function send_message()
 //-----------------------------------------------------------------------//
 
 
-
+/**
+ * @work checking if user logged in
+ */
+function checkLogin()
+{
+    if($_SESSION['username'] == "" && $_SESSION['user_email'] == ""){
+        redirect("login.php");
+    }
+}
 
 
 

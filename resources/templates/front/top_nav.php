@@ -24,17 +24,14 @@
                 <a href="shop.php">Shop</a>
             </li>
             <li>
-                <a href="checkout.php">Check out</a>
-            </li>
-            <li>
-                <a href="item.php">Items</a>
-            </li>
-            <li>
-                <a href="login.php">Login</a>
+                <a href="checkout.php">Your Basket</a>
             </li>
             <li>
                 <a href="contact.php">Contact</a>
             </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="login.php">Login</a></li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->

@@ -3,10 +3,18 @@
 <!-- Page Content -->
 
 <?php
-
+checkLogin();
 if(isset($_GET['tx'])){
 
+    // These are the get request passed from paypal
+    $amount = $_GET['amt'];
+    $currency = $_GET['cc'];
+    $transaction = $_GET['tx'];
+    $status = $_GET['st'];
 
+
+} else {
+    redirect("index.php");
 }
 
 ?>
