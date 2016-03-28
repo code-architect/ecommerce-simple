@@ -5,7 +5,9 @@
 <?php
 
 //session_destroy();
-checkLogin();
+
+// If logged in
+if(isset($_SESSION['username']) && isset($_SESSION['user_email'])){
 ?>
 
 
@@ -37,7 +39,7 @@ checkLogin();
                 </tbody>
             </table>
             <?php
-                if($_SESSION['total_products'] != 0){
+                if(isset($_SESSION['total_products'])){
             ?>
 
             <input type="image" name="upload"
@@ -91,8 +93,51 @@ checkLogin();
 
         </div><!-- CART TOTALS-->
 
-
     </div><!--Main Content-->
+
+
+
+    <!-- ***************************************************************************************** -->
+    <!-- If user not logged in -->
+    <?php } else { ?>
+        <div class="container">
+
+        <div class="row">
+            <h4 class="text-center bg-danger"><?php display_message(); ?></h4>
+            <h1>Checkout</h1>
+
+            <form action="login.php" method="post">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Sub-total</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php cart(); ?>
+                    </tbody>
+                </table>
+
+                <?php if(isset($_SESSION['total_products'])){ ?>
+
+                    <input type="submit" class="btn btn-primary btn-lg" value="Check Out">
+
+                <?php } else { echo "Your Basket Is empty"; } ?>
+
+
+            </form>
+        </div><!--Main Content-->
+
+    </div>
+
+    <?php } ?>
+    <!-- ***************************************************************************************** -->
+
 
 
 </div>

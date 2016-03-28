@@ -316,10 +316,11 @@ function send_message()
 /**
  * @work checking if user logged in
  */
-function checkLogin()
+function checkLogin($location)
 {
     if($_SESSION['username'] == "" && $_SESSION['user_email'] == ""){
-        redirect("login.php");
+        redirect($location);
+
     }
 }
 
