@@ -39,7 +39,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])){
                 </tbody>
             </table>
             <?php
-                if(isset($_SESSION['total_products'])){
+                if(isset($_SESSION['total_products']) && ($_SESSION['total_products'] != '0')){
             ?>
 
             <input type="image" name="upload"

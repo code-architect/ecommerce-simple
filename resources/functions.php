@@ -248,6 +248,23 @@ function redirect_if_not_valid($value)
     }
 }
 
+
+
+
+//-----------------------------------------------------------------------//
+
+/**
+ * @work unset session except given value in array
+ * @param $keys array
+ */
+function unsetExcept($keys) {
+    foreach ($_SESSION as $key => $value)
+        if (!in_array($key, $keys))
+            unset($_SESSION[$key]);
+}
+
+
+
 /*************************************************************************/
 /*****************          Back End Functions         *******************/
 /*************************************************************************/
