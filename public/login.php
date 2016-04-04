@@ -8,6 +8,7 @@
 
 <?php
 // Login Logic
+if(!isset($_SESSION['username'])){
 
 if(isset($_POST['submit'])){
     $username = escape_string($_POST['username']);
@@ -36,5 +37,11 @@ if(isset($_POST['submit'])){
 <?php display_message(); ?>
     <!-- Login Form End -->
 
+<?php } elseif(isset($_SESSION['username']) && $_SESSION['username'] == "admin") {
+    redirect("admin");
+} elseif(isset($_SESSION['username'])) {
+    redirect("shop.php");
+}
+?>
 
 <?php include(TEMPLATE_FRONT.DS."footer.php"); ?>

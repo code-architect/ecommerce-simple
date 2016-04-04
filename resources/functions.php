@@ -337,7 +337,6 @@ function checkLogin($location)
 {
     if($_SESSION['username'] == "" && $_SESSION['user_email'] == ""){
         redirect($location);
-
     }
 }
 
@@ -349,3 +348,13 @@ function checkLogin($location)
 /*************************************************************************/
 /*****************             Admin Functions         *******************/
 /*************************************************************************/
+
+
+/**
+ * @work if not admin do not allow
+ */
+function checkAdmin(){
+    if($_SESSION['username'] != "admin"){
+        redirect("../index.php");
+    }
+}
