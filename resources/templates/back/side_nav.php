@@ -8,6 +8,9 @@
             <a href="index.php?orders"><i class="fa fa-fw fa-dashboard"></i> Orders</a>
         </li>
         <li>
+            <a href="index.php?add_product"><i class="fa fa-fw fa-dashboard"></i> Add Product</a>
+        </li>
+        <li>
             <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
         </li>
         <li>

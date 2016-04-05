@@ -1,7 +1,10 @@
 <?php require_once("../../resources/config.php"); ?>
 <?php include(TEMPLATE_BACK.DS."header.php"); ?>
 
-
+<?php
+//check if user is admin or not
+checkAdmin();
+?>
 
 <div class="container-fluid">
 
@@ -9,13 +12,8 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Dashboard <small>Statistics Overview</small>
+            Admin Dashboard <small>Welcome Admin</small>
         </h1>
-        <ol class="breadcrumb">
-            <li class="active">
-                <i class="fa fa-dashboard"></i> Dashboard
-            </li>
-        </ol>
     </div>
 </div>
 <!-- /.row -->
@@ -30,9 +28,17 @@
     {
         include(TEMPLATE_ADMIN.DS."admin_content.php");
     }
-    if(isset($_GET['orders']))
+    elseif(isset($_GET['orders']))
     {
         include(TEMPLATE_ADMIN.DS."orders.php");
+    }
+    elseif(isset($_GET['add_product']))
+    {
+        include(TEMPLATE_ADMIN.DS."add_product.php");
+    }
+    else
+    {
+        include(TEMPLATE_ADMIN.DS."admin_content.php");
     }
     ?>
 
