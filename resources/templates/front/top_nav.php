@@ -31,7 +31,14 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="login.php">Login</a></li>
+            <?php if(isset($_SESSION['username']))
+            {
+                echo '<li><a href="admin/logout.php">Logout</a></li>';
+            } else{
+                echo '<li><a href="login.php">Login</a></li>';
+            }
+            ?>
+
         </ul>
     </div>
     <!-- /.navbar-collapse -->

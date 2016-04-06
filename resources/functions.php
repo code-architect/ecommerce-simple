@@ -343,8 +343,6 @@ function checkLogin($location)
 
 
 
-
-
 /*************************************************************************/
 /*****************             Admin Functions         *******************/
 /*************************************************************************/
@@ -388,8 +386,6 @@ function insert_report($order_shop_id){
                 // id of the product from session
                 $id = substr($name, 8,$length);
 
-
-
                 $query = query("SELECT * FROM products WHERE product_id = ".$id);
                 confirm($query);
 
@@ -400,6 +396,10 @@ function insert_report($order_shop_id){
 
                     $sql = query("INSERT INTO reports (product_id, order_shop_id, product_quanity_price, product_quantity)
                                   VALUES ('{$id}','{$order_shop_id}','{$sub}', '{$value}')");
+                    confirm($sql);
+
+                    $sql_new = query("UPDATE products SET product_quantity = (product_quantity - '{$value}') WHERE product_id = ".$id);
+                    confirm($sql_new);
                 }
             }
         }

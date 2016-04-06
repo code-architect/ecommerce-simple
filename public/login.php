@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
 <?php } elseif(isset($_SESSION['username']) && $_SESSION['username'] == "admin") {
     redirect("admin");
 } elseif(isset($_SESSION['username'])) {
-    redirect("shop.php");
+    redirect("index.php");
 }
 ?>
 
