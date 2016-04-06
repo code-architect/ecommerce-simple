@@ -355,6 +355,77 @@ function checkLogin($location)
  */
 function checkAdmin(){
     if($_SESSION['username'] != "admin"){
-        redirect("../index.php");
+        redirect("../login.php");
     }
 }
+
+
+
+//----------------------------------------------------------------------------//
+
+
+/**
+ * @work: Generate and store purchased products in reports table
+ * @param $order_shop_id
+ */
+function insert_report($order_shop_id){
+
+    $total_products = 0;
+    $total_price = 0;
+
+    // looping throw SESSION
+    foreach ($_SESSION as $name => $value) {
+
+        // if there is product in the curt show it
+        if ($value > 0) {
+
+            // making sure that we are looping throw the right session
+            if (substr($name, 0, 8) == "product_") {
+
+                // getting the length of the string minus "product_"
+                $length = strlen($name-8);
+
+                // id of the product from session
+                $id = substr($name, 8,$length);
+
+
+
+                $query = query("SELECT * FROM products WHERE product_id = ".$id);
+                confirm($query);
+
+                while ($row = fetch_array($query)) {
+
+                    // subtotal of the product
+                    $sub = $row['product_price'] * $value;
+
+                    $sql = query("INSERT INTO reports (product_id, order_shop_id, product_quanity_price, product_quantity)
+                                  VALUES ('{$id}','{$order_shop_id}','{$sub}', '{$value}')");
+                }
+            }
+        }
+    }
+}
+
+
+
+
+//------------------------------------------------------------------------------//
+
+/**
+ * work: checks if the same paypal transaction id exists or not
+ * @param $id
+ */
+function get_paypal_id($id) {
+    $query = query("SELECT order_id FROM orders WHERE order_tx = '{$id}'");
+    confirm($query);
+
+    if(mysqli_num_rows($query) == 0){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+
+
+

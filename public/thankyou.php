@@ -16,15 +16,22 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])) {
         $status = $_GET['st'];
 
         $buyer = escape_string($_SESSION['user_email']);
-        $order_shop_id = str_shuffle(time()."JK025GY8OIP789AS2");
+
+
+        $check_paypal_id = get_paypal_id($transaction);
 
         // checking id transaction is completed
-
-        if($_GET['st'] == "Completed")
+        if($_GET['st'] == "Completed" && $check_paypal_id == false)
         {
+            // unique order id
+            $order_shop_id = str_shuffle(time().$transaction);
+            $_SESSION['order_shop_id'] = $order_shop_id;
+
             $query = query("INSERT INTO orders (user_email, order_shop_id, order_amount, order_tx, order_status, order_currency)
                             VALUES ('{$buyer}', '{$order_shop_id}', '{$amount}', '{$transaction}', '{$status}', '{$currency}')");
             confirm($query);
+
+            insert_report($_SESSION['order_shop_id']);
         }
 
 
@@ -40,28 +47,19 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])) {
     <div class="container">
 
 
-        <?php
-        $query = query("SELECT o.order_shop_id, o.order_amount, o.order_tx, o.order_status,
-                        o.order_currency, u.user_firstname, u.user_lastname FROM orders o INNER JOIN users u
-                        where u.user_email = '{$buyer}'");
-        confirm($query);
-
-        while($row = fetch_array($query)){
-        ?>
-
         <!-- Jumbotron Header -->
         <header class="jumbotron hero-spacer">
 
-            <h1>Thank you, <?php echo ucfirst($row['user_firstname'])." ".ucfirst($row['user_lastname']); ?> for shopping</h1>
+            <h1>Thank you, for shopping</h1>
             <br>
             <br>
 
             <p><b>Your Used Email ID:                   </b><?php echo $buyer; ?></p>
-            <p><b>Your Product Order Id:                </b><?php echo $row['order_shop_id']; ?></p>
-            <p><b>Paid Amount:                          </b><?php echo $row['order_amount']; ?></p>
-            <p><b>Your PayPal Transaction Id:           </b><?php echo $row['order_tx']; ?></p>
-            <p><b>Your Transaction Currency in PayPal:  </b><?php echo $row['order_currency']; ?></p>
-            <p><b>Your PayPal Transaction Status:       </b><?php echo $row['order_status']; ?></p>
+            <p><b>Your Product Order Id:                </b><?php echo $_SESSION['order_shop_id']; ?></p>
+            <p><b>Paid Amount:                          </b><?php echo $amount; ?></p>
+            <p><b>Your PayPal Transaction Id:           </b><?php echo $transaction; ?></p>
+            <p><b>Your Transaction Currency in PayPal:  </b><?php echo $currency; ?></p>
+            <p><b>Your PayPal Transaction Status:       </b><?php echo $status; ?></p>
             <br>
             <br>
             <p>Thank You. For Shopping on our Web Site. To keep on shopping Click on the button below</p>
@@ -72,9 +70,9 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])) {
 
         <?php
             // releasing the keys except given value in the session
-            $keys = ['username', 'user_email'];
+            $keys = ['username', 'user_email', 'order_shop_id'];
             unsetExcept($keys);
-        }
+
 
         ?>
         <hr>
@@ -103,3 +101,4 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])) {
 </body>
 
 </html>
+
