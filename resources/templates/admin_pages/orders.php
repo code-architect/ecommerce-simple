@@ -5,34 +5,37 @@
             </h1>
         </div>
 
+
+
         <div class="col-lg-12">
             <div class="row">
 
                     <table class="table table-list-search">
                         <thead>
                         <tr>
-                            <th>Entry</th>
-                            <th>Entry</th>
-                            <th>Entry</th>
-                            <th>Entry</th>
-                            <th>Entry</th>
-                            <th>Entry</th>
-                            <th>Entry</th>
+                            <th>Order ID</th>
+                            <th>Order Amount</th>
+                            <th>PayPal Transaction ID</th>
+                            <th>Order Payment Status</th>
+                            <th>Order Currency</th>
+                            <th>User Email</th>
+
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Sample</td>
-                            <td>Filter</td>
-                            <td><img width="42" height="42" src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo"></td>
-                            <td>OK</td>
-                            <td>123</td>
-                            <td>Do some other</td>
-                            <td>Do some other</td>
-                        </tr>
+
+                        <?php display_orders(); ?>
 
                         </tbody>
                     </table>
+                <!--
+                SELECT a.order_shop_id, a.product_quantity, a.product_quanity_price,
+                b.user_email, b.order_tx, b.order_status,
+                c.product_title, c.product_price
+
+                FROM reports a, orders b, products c
+                WHERE a.order_shop_id = b.order_shop_id AND a.product_id = c.product_id
+                -->
             </div>
         </div>
 

@@ -428,4 +428,38 @@ function get_paypal_id($id) {
 
 
 
+//------------------------------------------------------------------------------//
 
+
+
+/**
+ * @work: Display orders in Admin orders page
+ */
+function display_orders()
+{
+    $query = query("SELECT * FROM orders");
+    confirm($query);
+
+    while($data = fetch_array($query)){
+
+    $orders = <<<DELEMITER
+
+        <tr>
+            <td><a href="index.php?oid={$data['order_shop_id']}">{$data['order_shop_id']}</a></td>
+            <td>{$data['order_amount']}</td>
+            <td>{$data['order_tx']}</td>
+            <td>{$data['order_status']}</td>
+            <td>{$data['order_currency']}</td>
+            <td>{$data['user_email']}</td>
+        </tr>
+
+DELEMITER;
+        echo $orders;
+    }
+
+}
+
+
+
+
+//------------------------------------------------------------------------------//

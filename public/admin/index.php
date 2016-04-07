@@ -28,13 +28,17 @@ checkAdmin();
     {
         include(TEMPLATE_ADMIN.DS."admin_content.php");
     }
-    elseif(isset($_GET['orders']))
+    elseif(isset($_GET['orders']))                              // Order summery page
     {
         include(TEMPLATE_ADMIN.DS."orders.php");
     }
-    elseif(isset($_GET['add_product']))
+    elseif(isset($_GET['add_product']))                         // Add Products Page
     {
         include(TEMPLATE_ADMIN.DS."add_product.php");
+    }
+    elseif(isset($_GET['oid']))                                 // The order details page
+    {
+        include(TEMPLATE_ADMIN.DS."order_details.php");
     }
     else
     {
