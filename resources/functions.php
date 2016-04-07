@@ -366,7 +366,7 @@ function checkAdmin(){
  * @work: Generate and store purchased products in reports table
  * @param $order_shop_id
  */
-function insert_report($order_shop_id){
+function process_transaction($order_shop_id){
 
     $total_products = 0;
     $total_price = 0;

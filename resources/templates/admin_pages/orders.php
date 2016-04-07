@@ -28,6 +28,11 @@
 
                         </tbody>
                     </table>
+
+                <!--
+                TODO: Create Order details
+                TODO: DELETE ORDER from both tables orders, reports
+                -->
                 <!--
                 SELECT a.order_shop_id, a.product_quantity, a.product_quanity_price,
                 b.user_email, b.order_tx, b.order_status,

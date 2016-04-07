@@ -31,7 +31,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])) {
                             VALUES ('{$buyer}', '{$order_shop_id}', '{$amount}', '{$transaction}', '{$status}', '{$currency}')");
             confirm($query);
 
-            insert_report($_SESSION['order_shop_id']);
+            process_transaction($_SESSION['order_shop_id']);
         }
 
 
@@ -72,6 +72,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])) {
             // releasing the keys except given value in the session
             $keys = ['username', 'user_email', 'order_shop_id'];
             unsetExcept($keys);
+            unset($_GET);
 
 
         ?>
