@@ -15,22 +15,15 @@
             <tr>
                 <th>Product ID</th>
                 <th>Product Name</th>
-                <th>Category</th>
                 <th>Product Image</th>
+                <th>Category</th>
                 <th>In Stock</th>
                 <th>Price</th>
             </tr>
             </thead>
             <tbody>
 
-                <td>Ok</td>
-                <td>Ok</td>
-                <td>Ok</td>
-                <td>Ok</td>
-                <td>Ok</td>
-                <td>Ok</td>
-                <td>Ok</td>
-                <td>Ok</td>
+                <?php get_products_admin(); ?>
 
             </tbody>
         </table>
