@@ -483,9 +483,8 @@ function get_products_admin(){
                 <td>{$row['cat_title']}</td>
                 <td>{$row['product_quantity']}</td>
                 <td>{$row['product_price']}</td>
-                <td>Ok</td>
-                <td>Ok</td>
-                <td>Ok</td>
+                <td><a href="index.php?edit_product=12" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"><spam></a></td>
+                <td><a href="" class="btn btn-danger"><spam class="glyphicon glyphicon-trash"><spam></a></td>
             </tr>
 DELEMITER;
 
