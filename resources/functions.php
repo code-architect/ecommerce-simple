@@ -470,7 +470,7 @@ DELEMITER;
  */
 function get_products_admin(){
 
-    $query = query("SELECT a.*,b.cat_title FROM products a INNER JOIN categories b WHERE b.cat_id = a.product_category_id");
+    $query = query("SELECT a.*,b.cat_title, b.cat_id FROM products a INNER JOIN categories b WHERE b.cat_id = a.product_category_id");
     confirm($query);
 
     while($row = fetch_array($query)) {
