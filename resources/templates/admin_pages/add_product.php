@@ -41,7 +41,7 @@
 
             <div class="form-group">
                 <label for="product-title">Product Short Description</label>
-                <textarea name="short_desc" id="" cols="30" rows="3" class="form-control"></textarea>
+                <textarea name="product_short_desc" id="" cols="30" rows="3" class="form-control"></textarea>
             </div>
 
 
@@ -81,14 +81,9 @@
                 <select name="product_status" id="" class="form-control">
                     <option value="">On Web</option>
                     <option value="">Drafted</option>
-
-
-
                 </select>
 
-
             </div>
-
 
 
             <div class="form-group">
@@ -97,19 +92,10 @@
             </div>
 
 
-            <!-- Product Tags -->
-
-
-            <!--  <div class="form-group">
-                   <label for="product-title">Product Keywords</label>
-                   <hr>
-                 <input type="text" name="product_tags" class="form-control">
-             </div>
-          -->
             <!-- Product Image -->
             <div class="form-group">
                 <label for="product-title">Product Image</label>
-                <input type="file" name="file">
+                <input type="file" name="image">
 
             </div>
 

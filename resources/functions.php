@@ -536,7 +536,15 @@ function create_product()
 {
     if(isset($_POST['publish']))
     {
-        $_POST['product_title']
+        $product_title          = escape_string($_POST['product_title']);
+        $product_category_id    = escape_string($_POST['product_category_id']);
+        $product_price          = escape_string($_POST['product_price']);
+        $product_quantity       = escape_string($_POST['product_quantity']);
+        $product_description    = escape_string($_POST['product_description']);
+        $product_short_desc     = escape_string($_POST['product_short_desc']);
+        $product_status         = escape_string($_POST['product_status']);
+        $product_image          = escape_string($_FILES['image']['name']);
+        $image_temp_loc         = escape_string($_FILES['image']['tmp_name']);
 
     }
 }
