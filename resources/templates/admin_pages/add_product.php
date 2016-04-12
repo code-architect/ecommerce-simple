@@ -7,7 +7,7 @@
         </h1>
     </div>
 
-
+<?php create_product(); ?>
 
     <form action="" method="post" enctype="multipart/form-data">
 
@@ -69,6 +69,18 @@
 
                 <select name="product_category_id" id="" class="form-control">
                     <option value="">Select Category</option>
+                </select>
+
+            </div>
+
+
+            <!-- Product Status -->
+            <div class="form-group">
+                <label for="product-title">Product Status</label>
+
+                <select name="product_status" id="" class="form-control">
+                    <option value="">On Web</option>
+                    <option value="">Drafted</option>
 
 
 
@@ -76,7 +88,7 @@
 
 
             </div>
-            <!-- Product Brands-->
+
 
 
             <div class="form-group">

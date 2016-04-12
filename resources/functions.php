@@ -123,7 +123,7 @@ function fetch_array($result)
 
 function get_products($type = 'ASC')
 {
-    $query = query("SELECT * FROM products WHERE product_quantity > 0 ORDER BY product_id $type");
+    $query = query("SELECT * FROM products WHERE product_quantity > 0 AND product_status = 1 ORDER BY product_id $type");
     confirm($query);
 
     while($row = fetch_array($query)){
@@ -180,7 +180,7 @@ function get_categories()
 
 function get_products_by_category($id)
 {
-    $query = query("SELECT * FROM products WHERE product_category_id = $id and product_quantity > 0");
+    $query = query("SELECT * FROM products WHERE product_category_id = $id and product_quantity > 0 AND product_status = 1");
     $get_num_rows = mysqli_num_rows($query);
     confirm($query);
 
@@ -468,12 +468,20 @@ DELEMITER;
 /**
  * @work: Show all the products to the admin section
  */
-function get_products_admin(){
+function get_products_admin()
+{
+    $onweb = "No";
 
     $query = query("SELECT a.*,b.cat_title, b.cat_id FROM products a INNER JOIN categories b WHERE b.cat_id = a.product_category_id");
     confirm($query);
 
     while($row = fetch_array($query)) {
+
+        if($row['product_status'] == 1){
+            $onweb = "Yes";
+        }else{
+            $onweb = "No";
+        }
 
         $product = <<<DELEMITER
             <tr>
@@ -482,9 +490,10 @@ function get_products_admin(){
                 <td><img src="{$row['product_image']}" height="70" width="70"></td>
                 <td>{$row['cat_title']}</td>
                 <td>{$row['product_quantity']}</td>
+                <td>{$onweb}</td>
                 <td>{$row['product_price']}</td>
-                <td><a href="index.php?edit_product=12" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"><spam></a></td>
-                <td><a href="" class="btn btn-danger"><spam class="glyphicon glyphicon-trash"><spam></a></td>
+                <td><a href="index.php?edit_product={$row['product_id']}" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"><spam></a></td>
+                <td><a onclick="return confirm('Are you sure you want to delete this item?');" href="../../resources/templates/admin_pages/delete_product.php?id={$row['product_id']}" class="btn btn-danger"><spam class="glyphicon glyphicon-trash"><spam></a></td>
             </tr>
 DELEMITER;
 
@@ -495,5 +504,39 @@ DELEMITER;
 
 
 
+//------------------------------------------------------------------------------//
 
 
+
+/**
+ * @work: check if product exists or not
+ * @param $id
+ * @return bool
+ */
+function check_product_exists($id)
+{
+    $query = query("SELECT product_title FROM products WHERE product_id = '{$id}'");
+    confirm($query);
+
+    if(mysqli_num_rows($query) == 0){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+
+
+//------------------------------------------------------------------------------//
+
+
+
+
+function create_product()
+{
+    if(isset($_POST['publish']))
+    {
+        $_POST['product_title']
+
+    }
+}

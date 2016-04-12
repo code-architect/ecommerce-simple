@@ -18,6 +18,7 @@
                 <th>Product Image</th>
                 <th>Category</th>
                 <th>In Stock</th>
+                <th>On Web</th>
                 <th>Price</th>
             </tr>
             </thead>
