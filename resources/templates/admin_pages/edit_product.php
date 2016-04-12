@@ -7,7 +7,13 @@
         </h1>
     </div>
 
-
+    <?php
+   // check if there is a $_GET request and if it is valid
+    $id = check_product_exists(escape_string($_GET['edit_product']));
+    if($id == false){
+        redirect('index.php?products');
+    } else{
+    ?>
 
     <form action="" method="post" enctype="multipart/form-data">
 
@@ -108,3 +114,5 @@
 
 
     </form>
+
+    <?php } // end of if ?>

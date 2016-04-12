@@ -5,10 +5,10 @@
     </h1>
 </div>
 
-
-
 <div class="col-lg-12">
     <div class="row">
+
+        <h3 class="bg-success"><?php display_message(); ?></h3>
 
         <table class="table table-list-search">
             <thead>
