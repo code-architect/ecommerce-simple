@@ -132,7 +132,7 @@ function get_products($type = 'ASC')
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="item.php?id={$row['product_id']}"><img src="{$row['product_image']}"></a>
+                            <a href="item.php?id={$row['product_id']}"><img height="150" width="320" src="{$row['product_image']}"></a>
                             <div class="caption">
                                 <h4 class="pull-right">&#8377;{$row['product_price']}</h4>
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
@@ -189,28 +189,12 @@ function get_products_by_category($id)
 
         while ($row = fetch_array($query)) {
 
-            /* $product = <<<DELEMITER
-
-                          <div class="col-md-3 col-sm-6 hero-feature">
-                             <div class="thumbnail">
-                                 <img src="{$row['product_image']}" alt="">
-                                 <div class="caption">
-                                     <h3>{$row['product_title']}</h3>
-                                     <p>{$row['product_short_desc']}</p>
-                                     <p>
-                                       <a href="cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a>
-                                       <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
-                                     </p>
-                                 </div>
-                             </div>
-                         </div>
-     DELEMITER;*/
 
             $product = <<<DELEMITER
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="item.php?id={$row['product_id']}"><img src="{$row['product_image']}"></a>
+                            <a href="item.php?id={$row['product_id']}"><img height="150" width="320" src="{$row['product_image']}"></a>
                             <div class="caption">
                                 <h4 class="pull-right">&#8377;{$row['product_price']}</h4>
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
@@ -530,8 +514,29 @@ function check_product_exists($id)
 //------------------------------------------------------------------------------//
 
 
+/**
+ * @work: show categories in add product page
+ */
+function category_for_add_product()
+{
+    $result = query(escape_string("SELECT * FROM categories"));
+    confirm($result);
+
+    while($row = fetch_array($result))
+    {
+        echo "<option value=".$row['cat_id'].">".$row['cat_title']."</option>";
+    }
+}
 
 
+
+
+//------------------------------------------------------------------------------//
+
+
+/**
+ * @work: create a new product in the inventory
+ */
 function create_product()
 {
     if(isset($_POST['publish']))
@@ -543,8 +548,22 @@ function create_product()
         $product_description    = escape_string($_POST['product_description']);
         $product_short_desc     = escape_string($_POST['product_short_desc']);
         $product_status         = escape_string($_POST['product_status']);
-        $product_image          = escape_string($_FILES['image']['name']);
-        $image_temp_loc         = escape_string($_FILES['image']['tmp_name']);
 
+        $file_name = $_FILES['image']['name'];
+        $file_tmp =$_FILES['image']['tmp_name'];
+
+        move_uploaded_file($file_tmp, TEMPLATE_IMAGE.DS.$file_name);
+
+        $query = query("INSERT INTO products(product_title, product_category_id, product_price, product_quantity,
+                                             product_description, product_short_desc, product_image, product_image_big,
+                                             product_status)
+
+                        VALUES('{$product_title}', '{$product_category_id}', '{$product_price}', '{$product_quantity}',
+                               '{$product_description}', '{$product_short_desc}', '{$file_name}', '{$file_name}',
+                               '{$product_status}')");
+        confirm($query);
+
+        set_message("New Product Just Added");
+        redirect("index.php?products");
     }
 }

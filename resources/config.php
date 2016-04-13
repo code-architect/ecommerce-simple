@@ -14,7 +14,7 @@ defined("DS") ? null : define("DS", DIRECTORY_SEPARATOR);
 defined("TEMPLATE_FRONT") ? null : define("TEMPLATE_FRONT", __DIR__.DS."templates".DS."front");
 defined("TEMPLATE_BACK") ? null : define("TEMPLATE_BACK", __DIR__.DS."templates".DS."back");
 defined("TEMPLATE_ADMIN") ? null : define("TEMPLATE_ADMIN", __DIR__.DS."templates".DS."admin_pages");
-
+defined("TEMPLATE_IMAGE") ? null : define("TEMPLATE_IMAGE", __DIR__.DS."uploads");
 
 // Database information
 defined("DB_HOST") ? null : define("DB_HOST", "localhost");
