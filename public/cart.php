@@ -98,7 +98,8 @@ function cart(){
                     $product = <<<DELEMITER
 
         <tr>
-            <td>{$row['product_title']}</td>
+            <td><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a></td>
+            <td><a href="item.php?id={$row['product_id']}"><img height="42" width="42" src="../resources/uploads/{$row['product_image']}"></a></td>
             <td>&#36;{$row['product_price']}</td>
             <td>{$value}</td>
             <td>&#36;{$sub}</td>
