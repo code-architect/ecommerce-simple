@@ -6,8 +6,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.html">SB Admin</a>
+    <a class="navbar-brand" href="index.php"><strong>Admin Dashboard</strong></a>
+    <a href="../index.php" class="navbar-brand"">View Front Page</a>
+
+
 </div>
+
+
 <!-- Top Menu Items -->
 <ul class="nav navbar-right top-nav">
     <li class="dropdown">

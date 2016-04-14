@@ -28,6 +28,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])){
                 <thead>
                 <tr>
                     <th>Product</th>
+                    <th>Image</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Sub-total</th>
@@ -112,6 +113,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['user_email'])){
                     <thead>
                     <tr>
                         <th>Product</th>
+                        <th>Image</th>
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Sub-total</th>

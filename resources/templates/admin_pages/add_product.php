@@ -94,9 +94,14 @@
 
             <!-- Product Image -->
             <div class="form-group">
-                <label for="product-title">Product Image</label>
+                <label for="product-title">Product Image Small</label>
                 <input type="file" name="image" id="image" required="">
+            </div>
 
+            <!-- Product Image -->
+            <div class="form-group">
+                <label for="product-title">Product Imagel</label>
+                <input type="file" name="image2" id="image2" required="">
             </div>
 
 

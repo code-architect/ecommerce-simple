@@ -16,6 +16,9 @@
         <li>
             <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
         </li>
+
+
+
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="demo" class="collapse">

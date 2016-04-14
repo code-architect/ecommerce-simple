@@ -33,7 +33,7 @@
 
     <div class="col-md-7">
 
-       <img class="img-responsive" src="<?php echo $row['product_image_big']; ?>" alt="">
+       <img class="img-responsive" src="../resources/uploads/<?php echo $row['product_image_big']; ?>" alt="">
 
     </div>
 

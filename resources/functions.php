@@ -132,7 +132,7 @@ function get_products($type = 'ASC')
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="item.php?id={$row['product_id']}"><img height="150" width="320" src="{$row['product_image']}"></a>
+                            <a href="item.php?id={$row['product_id']}"><img height="150" width="320" src="../resources/uploads/{$row['product_image']}"></a>
                             <div class="caption">
                                 <h4 class="pull-right">&#8377;{$row['product_price']}</h4>
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
@@ -194,7 +194,7 @@ function get_products_by_category($id)
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="item.php?id={$row['product_id']}"><img height="150" width="320" src="{$row['product_image']}"></a>
+                            <a href="item.php?id={$row['product_id']}"><img height="150" width="320" src="../resources/uploads/{$row['product_image']}"></a>
                             <div class="caption">
                                 <h4 class="pull-right">&#8377;{$row['product_price']}</h4>
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
@@ -471,7 +471,7 @@ function get_products_admin()
             <tr>
                 <td>{$row['product_id']}</td>
                 <td>{$row['product_title']}</td>
-                <td><img src="{$row['product_image']}" height="70" width="70"></td>
+                <td><img src="../../resources/uploads/{$row['product_image']}" height="70" width="70"></td>
                 <td>{$row['cat_title']}</td>
                 <td>{$row['product_quantity']}</td>
                 <td>{$onweb}</td>
@@ -552,14 +552,18 @@ function create_product()
         $file_name = $_FILES['image']['name'];
         $file_tmp =$_FILES['image']['tmp_name'];
 
-        move_uploaded_file($file_tmp, TEMPLATE_IMAGE.DS.$file_name);
+        $file_name1 = $_FILES['image2']['name'];
+        $file_tmp2 =$_FILES['image2']['tmp_name'];
+
+        move_uploaded_file($file_tmp, TEMPLATE_IMAGE.DS.$file_name);        // small image
+        move_uploaded_file($file_tmp2, TEMPLATE_IMAGE.DS.$file_name1);      // big image
 
         $query = query("INSERT INTO products(product_title, product_category_id, product_price, product_quantity,
                                              product_description, product_short_desc, product_image, product_image_big,
                                              product_status)
 
                         VALUES('{$product_title}', '{$product_category_id}', '{$product_price}', '{$product_quantity}',
-                               '{$product_description}', '{$product_short_desc}', '{$file_name}', '{$file_name}',
+                               '{$product_description}', '{$product_short_desc}', '{$file_name}', '{$file_name1}',
                                '{$product_status}')");
         confirm($query);
 
