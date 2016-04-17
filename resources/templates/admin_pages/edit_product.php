@@ -1,4 +1,4 @@
-
+<h3 class="bg-success"><?php display_message(); ?></h3>
 <?php
 // getting the get value
 $id = escape_string($_GET['edit_product']);
@@ -25,7 +25,7 @@ if($value == false){
 
 
 <div class="col-md-12">
-    <?php display_message(); ?>
+
     <div class="row">
         <h1 class="page-header">
             Edit Product
@@ -141,9 +141,7 @@ if($value == false){
             </div>
 
 
-
         </aside><!--SIDEBAR-->
-
 
 
     </form>

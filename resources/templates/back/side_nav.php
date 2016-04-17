@@ -14,7 +14,7 @@
             <a href="index.php?add_product"><i class="fa fa-fw fa-edit"></i> Add Product</a>
         </li>
         <li>
-            <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+            <a href="index.php?categories"><i class="fa fa-fw fa-table"></i> Categories</a>
         </li>
 
 

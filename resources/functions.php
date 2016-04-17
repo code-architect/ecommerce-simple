@@ -529,7 +529,7 @@ function check_product_exists($id)
 function category_for_add_product($id = "")
 {
 
-    $result = query(escape_string("SELECT * FROM categories"));
+    $result = query("SELECT * FROM categories");
     confirm($result);
 
     if($id == "")
@@ -612,8 +612,8 @@ function update_product($id)
         $product_category_id    = escape_string($_POST['product_category_id']);
         $product_price          = escape_string($_POST['product_price']);
         $product_quantity       = escape_string($_POST['product_quantity']);
-        $product_description    = escape_string($_POST['product_description']);
-        $product_short_desc     = escape_string($_POST['product_short_desc']);
+        $product_description    = trim(escape_string($_POST['product_description']));
+        $product_short_desc     = trim(escape_string($_POST['product_short_desc']));
         $product_status         = escape_string($_POST['product_status']);
 
         $file_name = $_FILES['image']['name'];
@@ -654,4 +654,34 @@ function update_product($id)
         set_message("Product has been updated.");
         redirect("index.php?edit_product=".$id);
     }
+}
+
+
+
+
+//------------------------------------------------------------------------------//
+
+
+/**
+ * @work: show categories in add product page
+*/
+function show_categories_in_admin()
+{
+    $result = query("SELECT * FROM categories");
+    confirm($result);
+
+        while ($row = fetch_array($result)) {
+            $category = <<<DELEMITER
+            <tr>
+                <td>{$row['cat_id']}</td>
+                <td>{$row['cat_title']}</td>
+                <td><a href="" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"><spam></a></td>
+                <td><a onclick="return confirm('Are you sure you want to delete this category?');" href="" class="btn btn-danger"><spam class="glyphicon glyphicon-trash"><spam></a></td>
+
+            <tr>
+DELEMITER;
+            echo $category;
+
+        }
+
 }
