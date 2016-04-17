@@ -2,58 +2,38 @@
 <?php include(TEMPLATE_FRONT.DS."header.php"); ?>
 <!-- Page Content -->
 
-<?php
-redirect_if_not_valid('id');
-?>
-    <!-- Page Content -->
-    <div class="container">
 
-        <!-- Jumbotron Header -->
-        <header class="jumbotron hero-spacer">
-            <h1>A Warm Welcome!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-            <p><a class="btn btn-primary btn-large">Call to action!</a>
-            </p>
-        </header>
-
-        <hr>
-
-        <!-- Title -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Features</h3>
-            </div>
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Viewing Items From Category: <?php  echo get_category_name_by_id($_GET['id']); ?>
+            </h1>
         </div>
-        <!-- /.row -->
+    </div>
+    <!-- /.row -->
 
-        <!-- Page Features -->
-        <div class="row text-center">
+    <div class="row">
+        <!-- Categories here -->
+        <?php include(TEMPLATE_FRONT.DS."side_nav.php"); ?>
 
-            <?php echo get_products_by_category(escape_string($_GET['id'])); ?>
 
-        </div>
-        <!-- /.row -->
+        <div class="col-md-9">
 
-        <hr>
 
-        <!-- Footer -->
-        <footer>
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
+
+                <?php echo get_products_by_category(escape_string($_GET['id'])); ?>
+
+            </div> <!-- end of row --->
+
+        </div>
 
     </div>
-    <!-- /.container -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+</div>
+<!-- /.container -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+<?php include(TEMPLATE_FRONT.DS."footer.php"); ?>
