@@ -173,6 +173,26 @@ function get_categories()
 
 //-----------------------------------------------------------------------//
 
+
+
+
+/**
+ * @work Getting category name by id
+ */
+function get_category_name_by_id($id)
+{
+    $sql = query(escape_string("SELECT cat_title FROM categories WHERE cat_id = {$id} LIMIT 1"));
+    confirm($sql);
+
+    $category = fetch_array($sql);
+    return $category[0];
+
+}
+
+
+//-----------------------------------------------------------------------//
+
+
 /**
  * @work Getting categories by id dynamically
  * @param $id S_GET id
@@ -211,24 +231,13 @@ DELEMITER;
 
         }
     }else{
-        redirect('index.php');
-    }
-}
+        $product = <<<DELEMITER
+            <h1>No Products Found.Sorry!</h1>
+            <h4> Try our other categories!</h4>
+DELEMITER;
 
+        echo $product;
 
-
-
-
-//-----------------------------------------------------------------------//
-
-/**
- * @work If somebody enters here with out proper Get value
- * @param $value $_GEt[value]
- */
-function redirect_if_not_valid($value)
-{
-    if ($_GET[$value] == 0 || $_GET[$value] == '' || $_GET[$value] == NULL) {
-        redirect('index.php');
     }
 }
 
@@ -517,14 +526,26 @@ function check_product_exists($id)
 /**
  * @work: show categories in add product page
  */
-function category_for_add_product()
+function category_for_add_product($id = "")
 {
+
     $result = query(escape_string("SELECT * FROM categories"));
     confirm($result);
 
-    while($row = fetch_array($result))
+    if($id == "")
     {
-        echo "<option value=".$row['cat_id'].">".$row['cat_title']."</option>";
+        while($row = fetch_array($result))
+        {
+            echo "<option value=".$row['cat_id'].">".$row['cat_title']."</option>";
+        }
+    }
+    else
+    {
+        while($row = fetch_array($result))
+        {
+            if($row['cat_id'] == $id) { $show = "selected>";}else {$show = ">";}
+            echo "<option value=".$row['cat_id']." ".$show.$row['cat_title']."</option>";
+        }
     }
 }
 
@@ -532,6 +553,7 @@ function category_for_add_product()
 
 
 //------------------------------------------------------------------------------//
+
 
 
 /**
@@ -569,5 +591,67 @@ function create_product()
 
         set_message("New Product Just Added");
         redirect("index.php?products");
+    }
+}
+
+
+
+
+
+//------------------------------------------------------------------------------//
+
+
+/**
+ * @work: Update product in the inventory
+ */
+function update_product($id)
+{
+    if(isset($_POST['Update']))
+    {
+        $product_title          = escape_string($_POST['product_title']);
+        $product_category_id    = escape_string($_POST['product_category_id']);
+        $product_price          = escape_string($_POST['product_price']);
+        $product_quantity       = escape_string($_POST['product_quantity']);
+        $product_description    = escape_string($_POST['product_description']);
+        $product_short_desc     = escape_string($_POST['product_short_desc']);
+        $product_status         = escape_string($_POST['product_status']);
+
+        $file_name = $_FILES['image']['name'];
+        $file_tmp =$_FILES['image']['tmp_name'];
+
+        $file_name1 = $_FILES['image2']['name'];
+        $file_tmp2 =$_FILES['image2']['tmp_name'];
+
+        // if the user decide to keep the same image
+        if(empty($file_name) && empty($file_name1)) {
+            $get_pic = query("SELECT product_image, product_image_big FROM products WHERE product_id = ".$id);
+            confirm($get_pic);
+            while($pic = fetch_array($get_pic)) {
+                $file_name = $pic['product_image'];
+                $file_name1 = $pic['product_image_big'];
+            }
+        }
+
+        move_uploaded_file($file_tmp, TEMPLATE_IMAGE.DS.$file_name);        // small image
+        move_uploaded_file($file_tmp2, TEMPLATE_IMAGE.DS.$file_name1);      // big image
+
+        $query =    "UPDATE products SET ";
+        $query .=   "product_title          = '{$product_title}', ";
+        $query .=   "product_category_id    = '{$product_category_id}', ";
+        $query .=   "product_price          = '{$product_price}', ";
+        $query .=   "product_quantity       = '{$product_quantity}', ";
+        $query .=   "product_description    = '{$product_description}', ";
+        $query .=   "product_short_desc     = '{$product_short_desc}', ";
+        $query .=   "product_image          = '{$file_name}', ";
+        $query .=   "product_image_big      = '{$file_name1}', ";
+        $query .=   "product_status         = '{$product_status}' ";
+        $query .=   "WHERE product_id       = '{$id}'";
+
+
+        $result = query($query);
+        confirm($result);
+
+        set_message("Product has been updated.");
+        redirect("index.php?edit_product=".$id);
     }
 }
