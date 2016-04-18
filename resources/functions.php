@@ -675,7 +675,7 @@ function show_categories_in_admin()
             <tr>
                 <td>{$row['cat_id']}</td>
                 <td>{$row['cat_title']}</td>
-                <td><a href="" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"><spam></a></td>
+                <td><a href="index.php?categories&edit_cat={$row['cat_id']}" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"><spam></a></td>
                 <td><a onclick="return confirm('Are you sure you want to delete this category?');" href="index.php?categories&cat_del={$row['cat_id']}" class="btn btn-danger"><spam class="glyphicon glyphicon-trash"><spam></a></td>
 
             <tr>
@@ -702,11 +702,40 @@ function add_category()
     {
         $cat_title = escape_string($_POST['cat_title']);
 
-        $sql = query("INSERT INTO categories (cat_title) VALUES ('{$cat_title}')");
-        confirm($sql);
+        if($cat_title == "")
+        {
+            set_message("Don't enter empty string");
+            redirect("index.php?categories");
+        }else {
+            $sql = query("INSERT INTO categories (cat_title) VALUES ('{$cat_title}')");
+            confirm($sql);
 
-        set_message("A new category has been added");
-        redirect("index.php?categories");
+            set_message("A new category has been added");
+            redirect("index.php?categories");
+        }
+    }
+}
+
+
+
+
+//------------------------------------------------------------------------------//
+
+
+/**
+ * @work: checks if category exists or not
+ * @param $id
+ * @return bool
+ */
+function check_category_exists($id)
+{
+    $query = query("SELECT * FROM categories WHERE cat_id = '{$id}'");
+    confirm($query);
+
+    if(mysqli_num_rows($query) == 0){
+        return false;
+    }else{
+        return true;
     }
 }
 
@@ -726,23 +755,56 @@ function delete_category()
 
         $id = escape_string($_GET['cat_del']);
 
-        $query = query("SELECT * FROM categories WHERE cat_id = '{$id}'");
-        confirm($query);
+        $check_category = check_category_exists($id);
 
-        if(mysqli_num_rows($query) == 0)
+        if($check_category == false)
         {
             set_message("No such category exists");
             redirect("index.php?categories");
         }
         else
         {
-            $sql = query("DELETE FROM categories WHERE cat_id = '{$id}'");
+            $sql1 = query("DELETE FROM categories WHERE cat_id = '{$id}'");
+            confirm($sql1);
             set_message("Category has been deleted");
             redirect("index.php?categories");
         }
     }
 }
 
+
+
+//------------------------------------------------------------------------------//
+
+
+
+/**
+ * @work: update category
+ */
+function update_category()
+{
+    if(isset($_POST['update_category'])){
+
+        $id = escape_string($_GET['edit_cat']);
+
+
+        $up_cat_title = escape_string($_POST['up_cat_title']);
+
+        if($up_cat_title == "")
+        {
+            set_message("Don't enter empty string.");
+            redirect("index.php?categories");
+        }
+        else
+        {
+
+            $sql = query("UPDATE categories SET cat_title = '{$up_cat_title}' WHERE cat_id = '{$id}'");
+            confirm($sql);
+            set_message("Category has been updated");
+            redirect("index.php?categories");
+        }
+    }
+}
 
 
 
