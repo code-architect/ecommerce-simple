@@ -663,7 +663,7 @@ function update_product($id)
 
 
 /**
- * @work: show categories in add product page
+ * @work: show categories in category page
 */
 function show_categories_in_admin()
 {
@@ -676,7 +676,7 @@ function show_categories_in_admin()
                 <td>{$row['cat_id']}</td>
                 <td>{$row['cat_title']}</td>
                 <td><a href="" class="btn btn-warning"><spam class="glyphicon glyphicon-pencil"><spam></a></td>
-                <td><a onclick="return confirm('Are you sure you want to delete this category?');" href="" class="btn btn-danger"><spam class="glyphicon glyphicon-trash"><spam></a></td>
+                <td><a onclick="return confirm('Are you sure you want to delete this category?');" href="index.php?categories&cat_del={$row['cat_id']}" class="btn btn-danger"><spam class="glyphicon glyphicon-trash"><spam></a></td>
 
             <tr>
 DELEMITER;
@@ -685,3 +685,77 @@ DELEMITER;
         }
 
 }
+
+
+
+//------------------------------------------------------------------------------//
+
+
+
+
+/**
+ * @work: add a new category to category table
+ */
+function add_category()
+{
+    if(isset($_POST['add_category']))
+    {
+        $cat_title = escape_string($_POST['cat_title']);
+
+        $sql = query("INSERT INTO categories (cat_title) VALUES ('{$cat_title}')");
+        confirm($sql);
+
+        set_message("A new category has been added");
+        redirect("index.php?categories");
+    }
+}
+
+
+
+
+//------------------------------------------------------------------------------//
+
+
+
+/**
+ * @work: delete category
+ */
+function delete_category()
+{
+    if(isset($_GET['cat_del'])){
+
+        $id = escape_string($_GET['cat_del']);
+
+        $query = query("SELECT * FROM categories WHERE cat_id = '{$id}'");
+        confirm($query);
+
+        if(mysqli_num_rows($query) == 0)
+        {
+            set_message("No such category exists");
+            redirect("index.php?categories");
+        }
+        else
+        {
+            $sql = query("DELETE FROM categories WHERE cat_id = '{$id}'");
+            set_message("Category has been deleted");
+            redirect("index.php?categories");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
