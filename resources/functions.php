@@ -430,7 +430,7 @@ function get_paypal_id($id) {
  */
 function display_orders()
 {
-    $query = query("SELECT * FROM orders");
+    $query = query("SELECT * FROM orders ORDER BY order_id DESC");
     confirm($query);
 
     while($data = fetch_array($query)){
@@ -438,7 +438,7 @@ function display_orders()
     $orders = <<<DELEMITER
 
         <tr>
-            <td><a href="index.php?oid={$data['order_shop_id']}">{$data['order_shop_id']}</a></td>
+            <td><a href="index.php?order_details&oid={$data['order_shop_id']}">{$data['order_shop_id']}</a></td>
             <td>{$data['order_amount']}</td>
             <td>{$data['order_tx']}</td>
             <td>{$data['order_status']}</td>
@@ -808,16 +808,72 @@ function update_category()
 
 
 
+//------------------------------------------------------------------------------//
+
+
+/**
+ * @work: check if the order exists or not
+ * @param $id
+ * @return bool
+ */
+function check_order_exists($id)
+{
+    $query = query("SELECT order_id FROM orders WHERE order_shop_id = '{$id}'");
+    confirm($query);
+    $number = mysqli_num_rows($query);
+
+    if($number == 1){
+        return true;
+    } else {
+        return false;
+    }
+
+}
 
 
 
+//------------------------------------------------------------------------------//
 
 
 
+/**
+ * @work: get the order details
+ * @param $id $_GET id
+ * @return array
+ */
+function get_order_details($id)
+{
+    $new = array();
 
+    // Getting the products
+    $sql1 = query("SELECT a.product_title, a.product_price, a.product_image, b.product_quantity, c.cat_title
+                    from products a INNER JOIN reports b INNER JOIN categories c
+                    where a.product_id
+                    IN
+                    (select a.product_id from reports where b.order_shop_id = '{$id}')
+                    AND a.product_id = b.product_id
+                    AND a.product_category_id = c.cat_id ORDER BY a.product_id");
+    confirm($sql1);
 
+    while($row1 = fetch_array($sql1)){
+        $new['products'][] = $row1;
+    }
+    // end of products operation
 
+    // getting the user details
+    $sql2 = query("SELECT user_firstname, user_lastname, user_address, user_state, user_city,
+                  user_country, user_pincode, user_phone, user_email, username
+                  from users
+                  WHERE user_email =
+                  (select user_email from orders where order_shop_id = '{$id}')");
+    confirm($sql2);
 
+    while($row2 = fetch_array($sql2)){
+        $new['users'][] = $row2;
+    }
+    // end of users operation
 
-
+    // returning the array
+    return $new;
+}
 

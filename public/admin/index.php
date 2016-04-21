@@ -54,7 +54,7 @@ checkAdmin();
         include(TEMPLATE_ADMIN.DS."categories.php");
     }
 
-    elseif(isset($_GET['oid']))                                 // The order details page view_product
+    elseif(isset($_GET['order_details']))                                 // The order details page view_product
     {
         include(TEMPLATE_ADMIN.DS."order_details.php");
     }
